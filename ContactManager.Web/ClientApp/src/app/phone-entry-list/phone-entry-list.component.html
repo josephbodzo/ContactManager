@@ -5,7 +5,10 @@
 </div>
 <hr />
 <div class="row bottom-margin">
-  <div class="col-md-3"><button type="button" class="btn btn-primary" (click)="openCreateModal()">Add New</button></div>
+  <div class="col-md-3">
+    <button type="button" class="btn btn-info" [routerLink]="['/']">Back</button>
+    <button type="button" class="btn btn-primary" (click)="openCreateModal()">Add New</button>
+  </div>
   <div class="col-md-offset-6 col-md-3">
     <input id="name" type="text" class="form-control" placeholder="Search..." [(ngModel)]="searchTerm" />
   </div>
