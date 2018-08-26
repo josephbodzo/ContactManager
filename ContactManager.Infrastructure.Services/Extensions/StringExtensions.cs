@@ -12,7 +12,7 @@ namespace ContactManager.Infrastructure.Services.Extensions
 
         public static string ToPhoneNumberFormat(this string str)
         {
-            return string.Format($"{{0:{Constants.Constants.CONSTANT_PHONE_DISPLAY_FORMAT}}}", Convert.ToInt64(str));
+            return string.Format($"{{0:{Constants.Constants.ConstantPhoneDisplayFormat}}}", Convert.ToInt64(str));
         }
     }
 }

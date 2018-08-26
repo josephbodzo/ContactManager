@@ -31,7 +31,7 @@ namespace ContactManager.Core.Services
             Guard.ThrowIfGreaterThanMaxLength(name, "Name", 50);
             Guard.ThrowIfDefaultOrEmpty(phoneNumber, "Phone Number");
             Guard.ThrowIfDefaultValue(phoneBookId, "Phone Book");
-            Guard.ThrowIfRegexNotMatch(phoneNumber, "Phone Number", Constants.CONSTANT_10_DIGIT_PHONE_FORMAT);
+            Guard.ThrowIfRegexNotMatch(phoneNumber, "Phone Number", Constants.Constant10DigitPhoneFormat);
 
             var phoneBook = await _phoneBookService.GetPhoneBookAsync(phoneBookId);
 
@@ -76,7 +76,7 @@ namespace ContactManager.Core.Services
             Guard.ThrowIfLessThanMinLength(phoneEntry.Name, nameof(phoneEntry.Name), 5);
             Guard.ThrowIfGreaterThanMaxLength(phoneEntry.Name, nameof(phoneEntry.Name), 50);
             Guard.ThrowIfDefaultOrEmpty(phoneEntry.PhoneNumber, "Phone Number");
-            Guard.ThrowIfRegexNotMatch(phoneEntry.PhoneNumber, "Phone Number", Constants.CONSTANT_10_DIGIT_PHONE_FORMAT);
+            Guard.ThrowIfRegexNotMatch(phoneEntry.PhoneNumber, "Phone Number", Constants.Constant10DigitPhoneFormat);
 
             var entity = await GetPhoneEntryAsync(phoneEntry.Id);
 
@@ -141,7 +141,7 @@ namespace ContactManager.Core.Services
         public async Task<PhoneEntry> GetPhoneEntryByNumberAsync(string phoneNumber)
         {
             Guard.ThrowIfDefaultOrEmpty(phoneNumber, "Phone number");
-            Guard.ThrowIfRegexNotMatch(phoneNumber, "Phone Number", Constants.CONSTANT_10_DIGIT_PHONE_FORMAT);
+            Guard.ThrowIfRegexNotMatch(phoneNumber, "Phone Number", Constants.Constant10DigitPhoneFormat);
 
             var sanitizedNumber = phoneNumber.RemoveNonNumericChars();
             var phoneEntry = await _repository.Entities.FirstOrDefaultAsync(f => f.PhoneNumber == sanitizedNumber);
