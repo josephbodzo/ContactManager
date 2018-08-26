@@ -11,7 +11,7 @@
   <div [hidden]="!errorMessage"class="alert alert-danger" role="alert">
     {{errorMessage}}
   </div>
-  <form [formGroup]="entryForm" (ngSubmit)="saveEntry(entryForm.value)" #entryCreateForm="ngForm" autocomplete="off" novalidate>
+  <form [formGroup]="entryForm" #entryCreateForm="ngForm" autocomplete="off" novalidate>
     <div class="form-group">
       <div class="row bottom-margin">
         <div class="col-md-3"> <label for="name">Name:</label></div>
@@ -25,7 +25,7 @@
   </form>
 </div>
 <div class="modal-footer">
-  <button type="submit" class="btn btn-primary" (click)="entryCreateForm.ngSubmit.emit()"
+  <button type="submit" class="btn btn-primary" (click)="showConfirmation()"
           [disabled]="!entryCreateForm.form.valid">Save</button>
   <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Close</button>
 </div>

@@ -29,7 +29,7 @@ namespace ContactManager.Web.Controllers
             try
             {
                 var phoneBooks = await _phoneBookService.GetPhoneBooksAsync();
-                return new OkObjectResult(_mapper.Map<IList<ApiPhoneBook>>(phoneBooks).OrderBy(p => p.Name));
+                return new OkObjectResult(_mapper.Map<IList<ApiPhoneBook>>(phoneBooks)?.OrderBy(p => p.Name));
 
             }
             catch (ValidateException ex)

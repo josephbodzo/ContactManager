@@ -29,6 +29,7 @@
   <ItemGroup>
     <None Remove="ClientApp\src\app\models\phoneBook.model.ts" />
     <None Remove="ClientApp\src\app\models\phoneEntry.model.ts" />
+    <None Remove="ClientApp\src\app\shared\enums\confirmation-result.enum.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,6 +39,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\models\phoneEntry.model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\phoneBook.model.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\shared\enums\confirmation-result.enum.ts" />
   </ItemGroup>
 
   <ItemGroup>

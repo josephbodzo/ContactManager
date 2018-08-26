@@ -1,0 +1,2 @@
+export const CONSTANT_RELOAD_PHONE_ENTRIES: string = "RELOAD_ENTRIES";
+export const CONSTANT_RELOAD_PHONE_BOOKS: string = "RELOAD_BOOKS";

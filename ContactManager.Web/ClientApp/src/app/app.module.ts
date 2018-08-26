@@ -15,6 +15,7 @@ import { PhoneEntryListComponent } from './phone-entry-list/phone-entry-list.com
 import { CreatePhoneEntryComponent } from './create-phone-entry/create-phone-entry.component';
 import { EditPhoneEntryComponent } from './edit-phone-entry/edit-phone-entry.component';
 import { RemovePhoneEntryComponent } from './remove-phone-entry/remove-phone-entry.component';
+import { ConfirmActionComponent } from './confirm-action/confirm-action.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { RemovePhoneEntryComponent } from './remove-phone-entry/remove-phone-ent
     PhoneEntryListComponent,
     CreatePhoneEntryComponent,
     EditPhoneEntryComponent,
-    RemovePhoneEntryComponent
+    RemovePhoneEntryComponent,
+    ConfirmActionComponent
   ],
   entryComponents: [
     CreatePhoneBookComponent,
@@ -35,7 +37,8 @@ import { RemovePhoneEntryComponent } from './remove-phone-entry/remove-phone-ent
     DeletePhoneBookComponent,
     RemovePhoneEntryComponent,
     EditPhoneEntryComponent,
-    CreatePhoneEntryComponent
+    CreatePhoneEntryComponent,
+    ConfirmActionComponent
     ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

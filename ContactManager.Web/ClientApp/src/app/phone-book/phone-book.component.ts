@@ -1,31 +1,35 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { CreatePhoneBookComponent } from "../create-phone-book/create-phone-book.component";
 import { EditPhoneBookComponent } from "../edit-phone-book/edit-phone-book.component";
 import { DeletePhoneBookComponent } from "../delete-phone-book/delete-phone-book.component";
 import { IPhoneBook } from '../models/phoneBook.model';
-
+import { Subscription } from 'rxjs';
+import { CONSTANT_RELOAD_PHONE_BOOKS } from "../shared/contants";
 
 @Component({
   selector: 'app-phone-book',
   templateUrl: './phone-book.component.html',
   styleUrls: ['./phone-book.component.css']
 })
-export class PhoneBookComponent implements OnInit {
+export class PhoneBookComponent implements OnInit, OnDestroy {
   phoneBooks: IPhoneBook[];
   searchTerm: string;
-  bsModalRef: BsModalRef;
+  subscription: Subscription;
 
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string, private modalService: BsModalService) {
     this.loadBooks();
   }
 
   ngOnInit() {
-    this.modalService.onHide.subscribe((reason: string) => {
-      this.loadBooks();
+    this.subscription = this.modalService.onHide.subscribe((message: string) => {
+      if (message === CONSTANT_RELOAD_PHONE_BOOKS) this.loadBooks();
     });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   loadBooks() {
@@ -42,21 +46,21 @@ export class PhoneBookComponent implements OnInit {
   }
 
   openCreateModal() {
-    this.bsModalRef = this.modalService.show(CreatePhoneBookComponent);
+   this.modalService.show(CreatePhoneBookComponent);
   }
 
   openEditModal(phoneBook: IPhoneBook) {
     const initialState = {
       phoneBook: phoneBook
     };
-    this.bsModalRef = this.modalService.show(EditPhoneBookComponent, {initialState});
+    this.modalService.show(EditPhoneBookComponent, {initialState});
   }
 
   openDeleteModal(phoneBook: IPhoneBook) {
     const initialState = {
       phoneBook: phoneBook
     };
-    this.bsModalRef = this.modalService.show(DeletePhoneBookComponent, { initialState });
+    this.modalService.show(DeletePhoneBookComponent, { initialState });
   }
 }
 
