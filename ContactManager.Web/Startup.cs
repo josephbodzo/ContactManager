@@ -2,7 +2,7 @@ using AutoMapper;
 using ContactManager.Core.Repositories;
 using ContactManager.Core.Repositories.DatabaseContext;
 using ContactManager.Core.Services;
-using ContactManager.Infrastructure.Services.Utilities;
+using ContactManager.Common.Utilities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;

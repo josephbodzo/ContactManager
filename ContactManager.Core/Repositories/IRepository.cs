@@ -10,6 +10,7 @@ namespace ContactManager.Core.Repositories
         IQueryable<TEntity> Entities { get; }
         Task AddAsync(TEntity entity);
         void Delete(TEntity entity);
+        void DeleteMany(IEnumerable<TEntity> entities);
         void Update(TEntity entity);
         Task<TEntity> FindByIdAsync(TId id);
         Task SaveChangesAsync();

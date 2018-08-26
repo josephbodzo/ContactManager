@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using ContactManager.Core.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -28,6 +29,11 @@ namespace ContactManager.Core.Repositories
             if (_dbContext.Entry(entity).State == EntityState.Detached)
                 _dbSet.Attach(entity);
             _dbSet.Remove(entity);
+        }
+
+        public void DeleteMany(IEnumerable<TEntity> entities)
+        {
+            _dbSet.RemoveRange(entities);
         }
 
         public async Task<TEntity> FindByIdAsync(TId id)

@@ -9,11 +9,11 @@ import { Subscription } from 'rxjs';
 import { CONSTANT_RELOAD_PHONE_BOOKS } from "../shared/constants";
 
 @Component({
-  selector: 'app-phone-book',
-  templateUrl: './phone-book.component.html',
-  styleUrls: ['./phone-book.component.css']
+  selector: 'app-phone-book-list',
+  templateUrl: './phone-book-list.component.html',
+  styleUrls: ['./phone-book-list.component.css']
 })
-export class PhoneBookComponent implements OnInit, OnDestroy {
+export class PhoneBookListComponent implements OnInit, OnDestroy {
   phoneBooks: IPhoneBook[];
   searchTerm: string;
   subscription: Subscription;

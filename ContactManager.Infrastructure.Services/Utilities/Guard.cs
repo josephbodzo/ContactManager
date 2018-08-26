@@ -1,7 +1,7 @@
 ﻿using System.Text.RegularExpressions;
-using ContactManager.Infrastructure.Services.Exceptions;
+using ContactManager.Common.Exceptions;
 
-namespace ContactManager.Infrastructure.Services.Utilities
+namespace ContactManager.Common.Utilities
 {
     public static class Guard
     {

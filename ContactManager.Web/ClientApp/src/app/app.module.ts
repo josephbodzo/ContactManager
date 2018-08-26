@@ -7,7 +7,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { PhoneBookComponent } from './phone-book/phone-book.component';
+import { PhoneBookListComponent } from './phone-book-list/phone-book-list.component';
 import { CreatePhoneBookComponent } from './create-phone-book/create-phone-book.component';
 import { EditPhoneBookComponent } from './edit-phone-book/edit-phone-book.component';
 import { DeletePhoneBookComponent } from './delete-phone-book/delete-phone-book.component';
@@ -21,7 +21,7 @@ import { ConfirmActionComponent } from './confirm-action/confirm-action.componen
   declarations: [
     AppComponent,
     NavMenuComponent,
-    PhoneBookComponent,
+    PhoneBookListComponent,
     CreatePhoneBookComponent,
     EditPhoneBookComponent,
     DeletePhoneBookComponent,
@@ -47,7 +47,7 @@ import { ConfirmActionComponent } from './confirm-action/confirm-action.componen
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: 'phoneEntries/:phoneBookId', component: PhoneEntryListComponent },
-      { path: '', component: PhoneBookComponent, pathMatch: 'full' }
+      { path: '', component: PhoneBookListComponent, pathMatch: 'full' }
     ]),
     ModalModule.forRoot()
   ],

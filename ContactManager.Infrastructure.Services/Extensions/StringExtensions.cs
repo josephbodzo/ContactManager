@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace ContactManager.Infrastructure.Services.Extensions
+namespace ContactManager.Common.Extensions
 {
     public static class StringExtensions
     {

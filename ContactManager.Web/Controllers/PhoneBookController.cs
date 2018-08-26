@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using ContactManager.Core.Entities;
 using ContactManager.Core.Services;
-using ContactManager.Infrastructure.Services.Exceptions;
+using ContactManager.Common.Exceptions;
 using ContactManager.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 

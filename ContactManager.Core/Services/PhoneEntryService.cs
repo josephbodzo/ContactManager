@@ -3,10 +3,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using ContactManager.Core.Entities;
 using ContactManager.Core.Repositories;
-using ContactManager.Infrastructure.Services.Constants;
-using ContactManager.Infrastructure.Services.Exceptions;
-using ContactManager.Infrastructure.Services.Extensions;
-using ContactManager.Infrastructure.Services.Utilities;
+using ContactManager.Common.Constants;
+using ContactManager.Common.Exceptions;
+using ContactManager.Common.Extensions;
+using ContactManager.Common.Utilities;
 using Microsoft.EntityFrameworkCore;
 
 namespace ContactManager.Core.Services
@@ -113,7 +113,7 @@ namespace ContactManager.Core.Services
             {
                 throw new NotFoundException("Phone entry not found");
             }
-
+            //TODO: Consider eagerly loading BookEntries, downside is we are now being concerned about how the entities are persisted whilst in the business layer
             var bookEntry = phoneEntry.BookEntries.FirstOrDefault(f => f.PhoneBookId == phoneBookId);
             if (bookEntry != null)
             {
@@ -144,6 +144,7 @@ namespace ContactManager.Core.Services
             Guard.ThrowIfRegexNotMatch(phoneNumber, "Phone Number", Constants.Constant10DigitPhoneFormat);
 
             var sanitizedNumber = phoneNumber.RemoveNonNumericChars();
+
             var phoneEntry = await _repository.Entities.FirstOrDefaultAsync(f => f.PhoneNumber == sanitizedNumber);
 
             return phoneEntry;

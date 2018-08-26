@@ -1,4 +1,4 @@
-﻿namespace ContactManager.Infrastructure.Services.Constants
+﻿namespace ContactManager.Common.Constants
 {
     public class Constants
     {

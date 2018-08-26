@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ContactManager.Infrastructure.Services.Exceptions
+namespace ContactManager.Common.Exceptions
 {
     public class NotFoundException: ValidateException
     {

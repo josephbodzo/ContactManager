@@ -5,9 +5,23 @@ VisualStudioVersion = 15.0.28010.2003
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactManager.Web", "ContactManager.Web\ContactManager.Web.csproj", "{25E1CD35-A7A5-4008-A6F1-F21A12F23A84}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactManager.Core", "ContactManager.Core\ContactManager.Core.csproj", "{BD142088-4907-4120-8715-A8795498B0E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactManager.Core", "ContactManager.Core\ContactManager.Core.csproj", "{BD142088-4907-4120-8715-A8795498B0E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactManager.Infrastructure.Services", "ContactManager.Infrastructure.Services\ContactManager.Infrastructure.Services.csproj", "{11299855-BAE9-4552-966D-31E5DEE16689}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactManager.Common", "ContactManager.Infrastructure.Services\ContactManager.Common.csproj", "{11299855-BAE9-4552-966D-31E5DEE16689}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{49507809-B1A9-4BAE-89CA-773A9108C369}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{31A2A45B-3EF8-49BA-9A72-AC342F909208}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{87FD1B1A-EF67-45F4-8A70-C55F9F27090A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactManager.Common.Unit.Tests", "ContactManager.Common.Unit.Tests\ContactManager.Common.Unit.Tests.csproj", "{A963F034-5EE4-4B9F-8234-4CFA26C05508}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactManager.Core.Unit.Tests", "ContactManager.Core.Unit.Tests\ContactManager.Core.Unit.Tests.csproj", "{BFA22DEF-3576-4835-9786-104CD0082B76}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactManager.Core.Integration.Tests", "ContactManager.Core.Integration.Tests\ContactManager.Core.Integration.Tests.csproj", "{7F5ACA92-9556-4971-BE8B-9F4D0DF5519E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactManager.Web.Integration.Tests", "ContactManager.Web.Integration.Tests\ContactManager.Web.Integration.Tests.csproj", "{21E3356E-4A0D-4469-99CB-D8D4AA14C68F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,9 +41,34 @@ Global
 		{11299855-BAE9-4552-966D-31E5DEE16689}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11299855-BAE9-4552-966D-31E5DEE16689}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11299855-BAE9-4552-966D-31E5DEE16689}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A963F034-5EE4-4B9F-8234-4CFA26C05508}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A963F034-5EE4-4B9F-8234-4CFA26C05508}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A963F034-5EE4-4B9F-8234-4CFA26C05508}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A963F034-5EE4-4B9F-8234-4CFA26C05508}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFA22DEF-3576-4835-9786-104CD0082B76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFA22DEF-3576-4835-9786-104CD0082B76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFA22DEF-3576-4835-9786-104CD0082B76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFA22DEF-3576-4835-9786-104CD0082B76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F5ACA92-9556-4971-BE8B-9F4D0DF5519E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F5ACA92-9556-4971-BE8B-9F4D0DF5519E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F5ACA92-9556-4971-BE8B-9F4D0DF5519E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F5ACA92-9556-4971-BE8B-9F4D0DF5519E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21E3356E-4A0D-4469-99CB-D8D4AA14C68F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21E3356E-4A0D-4469-99CB-D8D4AA14C68F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21E3356E-4A0D-4469-99CB-D8D4AA14C68F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21E3356E-4A0D-4469-99CB-D8D4AA14C68F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{25E1CD35-A7A5-4008-A6F1-F21A12F23A84} = {87FD1B1A-EF67-45F4-8A70-C55F9F27090A}
+		{BD142088-4907-4120-8715-A8795498B0E5} = {31A2A45B-3EF8-49BA-9A72-AC342F909208}
+		{11299855-BAE9-4552-966D-31E5DEE16689} = {49507809-B1A9-4BAE-89CA-773A9108C369}
+		{A963F034-5EE4-4B9F-8234-4CFA26C05508} = {49507809-B1A9-4BAE-89CA-773A9108C369}
+		{BFA22DEF-3576-4835-9786-104CD0082B76} = {31A2A45B-3EF8-49BA-9A72-AC342F909208}
+		{7F5ACA92-9556-4971-BE8B-9F4D0DF5519E} = {31A2A45B-3EF8-49BA-9A72-AC342F909208}
+		{21E3356E-4A0D-4469-99CB-D8D4AA14C68F} = {87FD1B1A-EF67-45F4-8A70-C55F9F27090A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3FA5C13E-1FB6-4889-9E5E-04E578A72061}

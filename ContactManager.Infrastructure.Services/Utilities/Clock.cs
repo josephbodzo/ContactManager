@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ContactManager.Infrastructure.Services.Utilities
+namespace ContactManager.Common.Utilities
 {
     public class Clock : IClock
     {

@@ -1,4 +1,4 @@
-﻿namespace ContactManager.Infrastructure.Services.Enums
+﻿namespace ContactManager.Common.Enums
 {
     public enum EnumSortDirection:int
     {

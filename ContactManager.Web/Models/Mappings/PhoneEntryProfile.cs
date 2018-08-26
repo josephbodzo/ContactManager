@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using ContactManager.Core.Entities;
-using ContactManager.Infrastructure.Services.Extensions;
+using ContactManager.Common.Extensions;
 
 namespace ContactManager.Web.Models.Mappings
 {
