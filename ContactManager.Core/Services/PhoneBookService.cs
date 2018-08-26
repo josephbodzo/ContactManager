@@ -3,10 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ContactManager.Core.Entities;
 using ContactManager.Core.Repositories;
-using ContactManager.Infrastructure.Services.Constants;
-using ContactManager.Infrastructure.Services.Enums;
 using ContactManager.Infrastructure.Services.Exceptions;
-using ContactManager.Infrastructure.Services.Paging;
 using ContactManager.Infrastructure.Services.Utilities;
 using Microsoft.EntityFrameworkCore;
 
@@ -39,12 +36,12 @@ namespace ContactManager.Core.Services
             return phoneBook;
         }
 
-        public async Task EditPhoneBook(PhoneBook phoneBook)
+        public async Task EditPhoneBookAsync(PhoneBook phoneBook)
         {
             Guard.ThrowIfDefaultOrEmpty(phoneBook.Name, nameof(phoneBook.Name));
             await ValidateAlreadyExists(phoneBook.Name, phoneBook.Id);
 
-            var entity = await GetPhoneBook(phoneBook.Id);
+            var entity = await GetPhoneBookAsync(phoneBook.Id);
             entity.Name = phoneBook.Name;
             entity.DateModified = _clock.Now;
 
@@ -52,39 +49,24 @@ namespace ContactManager.Core.Services
             await _repository.SaveChangesAsync();
         }
 
-        public PagedList<PhoneBook> SearchPhoneBooks(string searchValue,  PagingOptions pagingOptions)
+        public async Task<IList<PhoneBook>> GetPhoneBooksAsync()
         {
-           Guard.ThrowIfInvalidPaging(pagingOptions);
-            var query = _repository.Entities;
-
-            if (!string.IsNullOrEmpty(searchValue))
-            {
-                query = query.Where(p => p.Name.Contains(searchValue));
-            }
-
-           query =  query.OrderBy(p => p.Name);
-
-           return  query.ToPagedList(pagingOptions);
+           return await _repository.Entities.OrderBy(p => p.Name).ToListAsync();
         }
 
-        public async Task DeletePhoneBook(int id)
+        public async Task DeletePhoneBookAsync(int id)
         {
-            var entity = await GetPhoneBook(id);
+            var entity = await GetPhoneBookAsync(id);
             _repository.Delete(entity);
             await _repository.SaveChangesAsync();
         }
 
-        public async Task<PhoneBook> GetPhoneBook(int id)
+        public async Task<PhoneBook> GetPhoneBookAsync(int id)
         {
             Guard.ThrowIfDefaultValue(id, "Phone book");
 
             var phoneBook = await
                 _repository.FindByIdAsync(id);
-
-            if (phoneBook == null)
-            {
-                throw new NotFoundException("Phone book not found.");
-            }
 
             return phoneBook;
         }

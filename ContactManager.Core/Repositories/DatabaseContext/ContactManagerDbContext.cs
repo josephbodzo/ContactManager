@@ -13,6 +13,7 @@ namespace ContactManager.Core.Repositories.DatabaseContext
         {
             //TODO: Move to config
             optionsBuilder.UseSqlite("Data Source=ContactManager.db");
+            optionsBuilder.UseLazyLoadingProxies();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

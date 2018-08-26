@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using ContactManager.Core.Entities;
-using ContactManager.Infrastructure.Services.Paging;
 
 namespace ContactManager.Web.Models.Mappings
 {
@@ -13,6 +8,11 @@ namespace ContactManager.Web.Models.Mappings
         public PhoneBookProfile()
         {
             CreateMap<PhoneBook, ApiPhoneBook>();
+            CreateMap<ApiEditPhoneBook, PhoneBook>()
+                .ForMember(x => x.BookEntries, opt => opt.Ignore())
+                .ForMember(x => x.ContactCount, opt => opt.Ignore())
+                .ForMember(x => x.DateCreated, opt => opt.Ignore())
+                .ForMember(x => x.DateModified, opt => opt.Ignore());
         }
     }
 }

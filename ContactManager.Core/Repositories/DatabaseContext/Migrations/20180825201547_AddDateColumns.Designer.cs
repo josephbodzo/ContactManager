@@ -3,14 +3,16 @@ using System;
 using ContactManager.Core.Repositories.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ContactManager.Core.Repositories.DatabaseContext.Migrations
 {
     [DbContext(typeof(ContactManagerDbContext))]
-    partial class ContactManagerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180825201547_AddDateColumns")]
+    partial class AddDateColumns
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

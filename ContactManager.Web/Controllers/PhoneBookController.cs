@@ -1,8 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
+using ContactManager.Core.Entities;
 using ContactManager.Core.Services;
 using ContactManager.Infrastructure.Services.Exceptions;
-using ContactManager.Infrastructure.Services.Paging;
 using ContactManager.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,18 +23,13 @@ namespace ContactManager.Web.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet(Name = "search")]
-        public IActionResult SearchPhoneBooks(SearchModel searchModel)
+        [HttpGet]
+        public async Task<IActionResult> Get()
         {
             try
             {
-                var pagedList = _phoneBookService.SearchPhoneBooks(searchModel?.Search?.Value, new PagingOptions
-                {
-                    Take = searchModel?.Length ?? 0,
-                    Skip = searchModel?.Start ?? 0
-                });
-
-                return new OkObjectResult(pagedList.Map(_mapper.Map<ApiPhoneBook>));
+                var phoneBooks = await _phoneBookService.GetPhoneBooksAsync();
+                return new OkObjectResult(_mapper.Map<IList<ApiPhoneBook>>(phoneBooks).OrderBy(p => p.Name));
 
             }
             catch (ValidateException ex)
@@ -43,17 +40,31 @@ namespace ContactManager.Web.Controllers
         }
 
         [HttpGet("{id}", Name = "PhoneBookGet")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> PostAsync([FromBody] string name)
+        public async Task<IActionResult> Get(int id)
         {
             try
             {
-               var phoneBook = await _phoneBookService.CreatePhoneBookAsync(name);
+                var phoneBook = await _phoneBookService.GetPhoneBookAsync(id);
+
+                if (phoneBook == null)
+                {
+                    return new NotFoundResult();
+                }
+                return new OkObjectResult(_mapper.Map<ApiPhoneBook>(phoneBook));
+
+            }
+            catch (ValidateException ex)
+            {
+                return new BadRequestObjectResult(ex.Message);
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Post(ApiCreatePhoneBook phoneBookModel)
+        {
+            try
+            {
+               var phoneBook = await _phoneBookService.CreatePhoneBookAsync(phoneBookModel.Name);
                return CreatedAtRoute(
                     routeName: "PhoneBookGet",
                     routeValues: new {id = phoneBook.Id},
@@ -69,16 +80,41 @@ namespace ContactManager.Web.Controllers
             }
         }
 
-        // PUT: api/PhoneBook/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Put(ApiEditPhoneBook phoneBookModel)
         {
+            try
+            {
+                var phoneBook = _mapper.Map<PhoneBook>(phoneBookModel);
+                await _phoneBookService.EditPhoneBookAsync(phoneBook);
+                return new OkResult();
+            }
+            catch (NotFoundException)
+            {
+                return new NotFoundResult();
+            }
+            catch (ValidateException ex)
+            {
+                return new BadRequestObjectResult(ex.Message);
+            }
         }
 
-        // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
+            try
+            {
+                await _phoneBookService.DeletePhoneBookAsync(id);
+                return new OkResult();
+            }
+            catch (NotFoundException)
+            {
+                return new NotFoundResult();
+            }
+            catch (ValidateException ex)
+            {
+                return new BadRequestObjectResult(ex.Message);
+            }
         }
     }
 }

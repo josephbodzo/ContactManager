@@ -1,0 +1,32 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Delete Phone Book</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div [hidden]="!deleteSuccessful" class="alert alert-success" role="alert">
+    Phone book has been deleted successfully.
+  </div>
+  <div [hidden]="!errorMessage" class="alert alert-danger" role="alert">
+    {{errorMessage}}
+  </div>
+  <div class="form-group">
+    <div class="row">
+      <div class="col-md-3"> <label for="name">Name:</label></div>
+      <div class="col-md-7"> <input [ngModel]="phoneBook.name"  id="name" disabled="disabled" type="text" class="form-control" /></div>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="row">
+      <div class="col-md-3"> <label for="contactCount">Contact Count:</label></div>
+      <div class="col-md-7"> <input id="contactCount" type="text" disabled="disabled" class="form-control" [ngModel]="phoneBook.contactCount" /></div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="submit" class="btn btn-danger" (click)="deleteBook(phoneBook.id)">
+    Delete
+  </button>
+  <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Close</button>
+</div>

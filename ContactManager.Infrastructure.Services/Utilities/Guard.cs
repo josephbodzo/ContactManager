@@ -1,5 +1,4 @@
 ﻿using ContactManager.Infrastructure.Services.Exceptions;
-using ContactManager.Infrastructure.Services.Paging;
 
 namespace ContactManager.Infrastructure.Services.Utilities
 {
@@ -19,17 +18,6 @@ namespace ContactManager.Infrastructure.Services.Utilities
             {
                 throw new ValidateException(argumentName, "{0} is required.");
             }
-        }
-
-        public static void ThrowIfInvalidPaging(PagingOptions pagingOptions)
-        {
-            if(pagingOptions == null) return;
-
-            if (pagingOptions.Take < 0 || pagingOptions.Skip < 0)
-                throw new ValidateException("Take and Skip can not be negative");
-
-            if (pagingOptions.Take > Constants.Constants.ConstantMaxPageTake)
-                throw new ValidateException($"Cannot return more than {Constants.Constants.ConstantMaxPageTake} items");
         }
     }
 }

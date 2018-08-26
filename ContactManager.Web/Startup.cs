@@ -1,5 +1,6 @@
 using AutoMapper;
 using ContactManager.Core.Repositories;
+using ContactManager.Core.Repositories.DatabaseContext;
 using ContactManager.Core.Services;
 using ContactManager.Infrastructure.Services.Utilities;
 using Microsoft.AspNetCore.Builder;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -28,9 +30,11 @@ namespace ContactManager.Web
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             //TODO: consider using structuremap as our DI container
-            services.AddTransient(typeof(IRepository<,>), typeof(Repository<,>));
-            services.AddTransient(typeof(IClock), typeof(Clock));
-            services.AddTransient(typeof(IPhoneBookService), typeof(PhoneBookService));
+            services.AddScoped(typeof(DbContext), typeof(ContactManagerDbContext));
+            services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
+            services.AddScoped(typeof(IClock), typeof(Clock));
+            services.AddScoped(typeof(IPhoneBookService), typeof(PhoneBookService));
+
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
