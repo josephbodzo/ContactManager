@@ -28,6 +28,7 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\app\models\phoneBook.model.ts" />
+    <None Remove="ClientApp\src\app\models\phoneEntry.model.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,7 +36,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\models\phoneEntry.model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\phoneBook.model.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="ClientApp\src\app\models\phoneEntry.model.js">
+      <DependentUpon>phoneEntry.model.ts</DependentUpon>
+    </None>
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

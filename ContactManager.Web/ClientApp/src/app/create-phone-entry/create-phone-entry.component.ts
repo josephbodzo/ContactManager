@@ -4,27 +4,32 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-create-phone-book',
-  templateUrl: './create-phone-book.component.html',
-  styleUrls: ['./create-phone-book.component.css']
+  selector: 'app-create-phone-entry',
+  templateUrl: './create-phone-entry.component.html',
+  styleUrls: ['./create-phone-entry.component.css']
 })
-export class CreatePhoneBookComponent implements OnInit {
-  constructor(public bsModalRef: BsModalRef, private http: HttpClient, @Inject('BASE_URL') private baseUrl: string,) { }
+export class CreatePhoneEntryComponent implements OnInit {
+  constructor(public bsModalRef: BsModalRef, private readonly http: HttpClient, @Inject('BASE_URL') private baseUrl: string, ) { }
   name: FormControl;
-  bookForm: FormGroup;
+  phoneNumber: FormControl;
+  entryForm: FormGroup;
   saveSuccessful: boolean;
   errorMessage: string;
+  phoneBookId: number;
 
   ngOnInit() {
     this.name = new FormControl(null, Validators.required);
-    this.bookForm = new FormGroup({
-      name: this.name
+    this.phoneNumber = new FormControl(null, Validators.required);
+    this.entryForm = new FormGroup({
+      name: this.name,
+      phoneNumber: this.phoneNumber
     });
   }
 
-  saveBook(formValues) {
+  saveEntry(formValues) {
+
     this.errorMessage = "";
-    this.http.post(this.baseUrl + 'api/phonebooks', formValues).subscribe(result => {
+    this.http.post(this.baseUrl + `api/phoneentries/${this.phoneBookId}`, formValues).subscribe(result => {
         this.saveSuccessful = true;
         setTimeout(() => this.bsModalRef.hide(), 1000);
       },

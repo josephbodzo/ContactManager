@@ -1,0 +1,31 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Update Phone Entry</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div [hidden]="!saveSuccessful"class="alert alert-success" role="alert">
+    Phone entry has been updated successfully.
+  </div>
+  <div [hidden]="!errorMessage"class="alert alert-danger" role="alert">
+    {{errorMessage}}
+  </div>
+  <form [formGroup]="entryForm" (ngSubmit)="saveEntry(entryForm.value)" #entryCreateForm="ngForm" autocomplete="off" novalidate>
+    <div class="form-group">
+      <div class="row bottom-margin">
+        <div class="col-md-3"> <label for="name">Name:</label></div>
+        <div class="col-md-7"> <input formControlName="name" id="name" type="text" class="form-control" placeholder="Name"/></div>
+      </div>
+      <div class="row">
+        <div class="col-md-3"> <label for="phoneNumber">Phone Number:</label></div>
+        <div class="col-md-7"> <input formControlName="phoneNumber" id="phoneNumber" type="text" class="form-control" placeholder="Phone Number"/></div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="submit" class="btn btn-primary" (click)="entryCreateForm.ngSubmit.emit()"
+          [disabled]="!entryCreateForm.form.valid">Update</button>
+  <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Close</button>
+</div>

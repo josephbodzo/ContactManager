@@ -42,6 +42,13 @@ namespace ContactManager.Core.Services
             await ValidateAlreadyExists(phoneBook.Name, phoneBook.Id);
 
             var entity = await GetPhoneBookAsync(phoneBook.Id);
+
+
+            if (entity == null)
+            {
+                throw new NotFoundException("Phone book not found");
+            }
+
             entity.Name = phoneBook.Name;
             entity.DateModified = _clock.Now;
 
@@ -57,6 +64,12 @@ namespace ContactManager.Core.Services
         public async Task DeletePhoneBookAsync(int id)
         {
             var entity = await GetPhoneBookAsync(id);
+
+            if (entity == null)
+            {
+                throw new NotFoundException("Phone book not found");
+            }
+
             _repository.Delete(entity);
             await _repository.SaveChangesAsync();
         }

@@ -1,0 +1,30 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Remove Phone Entry</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div [hidden]="!deleteSuccessful" class="alert alert-success" role="alert">
+    Phone entry has been removed successfully.
+  </div>
+  <div [hidden]="!errorMessage" class="alert alert-danger" role="alert">
+    {{errorMessage}}
+  </div>
+    <div class="form-group">
+      <div class="row bottom-margin">
+        <div class="col-md-3"> <label for="name">Name:</label></div>
+        <div class="col-md-7"> <input  id="name" [ngModel]="phoneEntry.name" disabled="disabled" type="text" class="form-control"/></div>
+      </div>
+      <div class="row">
+        <div class="col-md-3"> <label for="phoneNumber">Phone Number:</label></div>
+        <div class="col-md-7"> <input id="phoneNumber" [ngModel]="phoneEntry.phoneNumber" disabled="disabled" type="text" class="form-control" /></div>
+      </div>
+    </div>
+</div>
+<div class="modal-footer">
+  <button type="submit" class="btn btn-primary" (click)="removeEntry(phoneEntry.id)">
+    Remove
+  </button>
+  <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Close</button>
+</div>

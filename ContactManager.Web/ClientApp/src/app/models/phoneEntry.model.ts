@@ -1,8 +1,8 @@
 
-export interface IPhoneBook {
+export interface IPhoneEntry {
   id: number;
   name: string,
-  contactCount: number,
+  phoneNumber: string,
   dateCreated: number;
   dateModified: number;
 }

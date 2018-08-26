@@ -41,8 +41,6 @@ namespace ContactManager.Core.Repositories.DatabaseContext.Migrations
 
                     b.Property<DateTime>("DateCreated");
 
-                    b.Property<DateTime>("DateModified");
-
                     b.HasKey("PhoneBookId", "PhoneEntryId");
 
                     b.HasIndex("PhoneEntryId");
@@ -61,6 +59,8 @@ namespace ContactManager.Core.Repositories.DatabaseContext.Migrations
 
                     b.Property<string>("Name")
                         .HasMaxLength(50);
+
+                    b.Property<string>("PhoneNumber");
 
                     b.HasKey("Id");
 

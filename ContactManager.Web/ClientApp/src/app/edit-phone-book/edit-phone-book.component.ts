@@ -27,14 +27,13 @@ export class EditPhoneBookComponent implements OnInit {
 
   saveBook(formValues) {
     this.errorMessage = "";
-    this.phoneBook.name = formValues.name;
 
-    this.http.put(this.baseUrl + `api/phonebooks/${this.phoneBook.id}`, this.phoneBook).subscribe(result => {
+    this.http.put(this.baseUrl + `api/phonebooks/${this.phoneBook.id}`, formValues).subscribe(result => {
         this.saveSuccessful = true;
         setTimeout(() => this.bsModalRef.hide(), 1000);
       },
       error => {
-        if (error.error && !error.error.includes("DOCTYPE"))
+        if (error.error && error.error.includes && !error.error.includes("DOCTYPE"))
           this.errorMessage = error.error;
         else
           this.errorMessage = "Oops! An error occurred whilst processing your request.";

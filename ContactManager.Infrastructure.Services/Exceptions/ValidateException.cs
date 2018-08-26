@@ -8,7 +8,7 @@ namespace ContactManager.Infrastructure.Services.Exceptions
    
         /// <param name="fieldName"></param>
         /// <param name="message">message optionally takes {0} where field name will be inserted</param>
-        public ValidateException(string message, string fieldName)
+        public ValidateException(string fieldName, string message)
             : this(string.Format(message, fieldName))
         {
 

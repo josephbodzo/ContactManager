@@ -22,7 +22,7 @@ export class DeletePhoneBookComponent {
         setTimeout(() => this.bsModalRef.hide(), 1000);
       },
       error => {
-        if (error.error && !error.error.includes("DOCTYPE"))
+        if (error.error && error.error.includes && !error.error.includes("DOCTYPE"))
           this.errorMessage = error.error;
         else
           this.errorMessage = "Oops! An error occurred whilst processing your request.";

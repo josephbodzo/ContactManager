@@ -34,6 +34,7 @@ namespace ContactManager.Web
             services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
             services.AddScoped(typeof(IClock), typeof(Clock));
             services.AddScoped(typeof(IPhoneBookService), typeof(PhoneBookService));
+            services.AddScoped(typeof(IPhoneEntryService), typeof(PhoneEntryService));
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

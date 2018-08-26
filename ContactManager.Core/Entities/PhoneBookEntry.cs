@@ -9,6 +9,5 @@ namespace ContactManager.Core.Entities
         public int PhoneEntryId { get; set; }
         public virtual PhoneEntry PhoneEntry { get; set; }
         public DateTime DateCreated { get; set; }
-        public DateTime DateModified { get; set; }
     }
 }

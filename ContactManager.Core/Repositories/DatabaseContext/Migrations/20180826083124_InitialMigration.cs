@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ContactManager.Core.Repositories.DatabaseContext.Migrations
 {
@@ -12,6 +13,8 @@ namespace ContactManager.Core.Repositories.DatabaseContext.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    DateCreated = table.Column<DateTime>(nullable: false),
+                    DateModified = table.Column<DateTime>(nullable: false),
                     Name = table.Column<string>(maxLength: 50, nullable: true)
                 },
                 constraints: table =>
@@ -25,7 +28,10 @@ namespace ContactManager.Core.Repositories.DatabaseContext.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(maxLength: 50, nullable: true)
+                    Name = table.Column<string>(maxLength: 50, nullable: true),
+                    PhoneNumber = table.Column<string>(nullable: true),
+                    DateCreated = table.Column<DateTime>(nullable: false),
+                    DateModified = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -37,7 +43,8 @@ namespace ContactManager.Core.Repositories.DatabaseContext.Migrations
                 columns: table => new
                 {
                     PhoneBookId = table.Column<int>(nullable: false),
-                    PhoneEntryId = table.Column<int>(nullable: false)
+                    PhoneEntryId = table.Column<int>(nullable: false),
+                    DateCreated = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {

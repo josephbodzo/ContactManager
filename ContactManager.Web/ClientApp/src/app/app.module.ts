@@ -11,6 +11,10 @@ import { PhoneBookComponent } from './phone-book/phone-book.component';
 import { CreatePhoneBookComponent } from './create-phone-book/create-phone-book.component';
 import { EditPhoneBookComponent } from './edit-phone-book/edit-phone-book.component';
 import { DeletePhoneBookComponent } from './delete-phone-book/delete-phone-book.component';
+import { PhoneEntryListComponent } from './phone-entry-list/phone-entry-list.component';
+import { CreatePhoneEntryComponent } from './create-phone-entry/create-phone-entry.component';
+import { EditPhoneEntryComponent } from './edit-phone-entry/edit-phone-entry.component';
+import { RemovePhoneEntryComponent } from './remove-phone-entry/remove-phone-entry.component';
 
 @NgModule({
   declarations: [
@@ -19,17 +23,28 @@ import { DeletePhoneBookComponent } from './delete-phone-book/delete-phone-book.
     PhoneBookComponent,
     CreatePhoneBookComponent,
     EditPhoneBookComponent,
-    DeletePhoneBookComponent
+    DeletePhoneBookComponent,
+    PhoneEntryListComponent,
+    CreatePhoneEntryComponent,
+    EditPhoneEntryComponent,
+    RemovePhoneEntryComponent
   ],
-  entryComponents: [CreatePhoneBookComponent, EditPhoneBookComponent, DeletePhoneBookComponent],
+  entryComponents: [
+    CreatePhoneBookComponent,
+    EditPhoneBookComponent,
+    DeletePhoneBookComponent,
+    RemovePhoneEntryComponent,
+    EditPhoneEntryComponent,
+    CreatePhoneEntryComponent
+    ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
-      { path: '', component: PhoneBookComponent, pathMatch: 'full' },
-
+      { path: 'phoneEntries/:phoneBookId', component: PhoneEntryListComponent },
+      { path: '', component: PhoneBookComponent, pathMatch: 'full' }
     ]),
     ModalModule.forRoot()
   ],
