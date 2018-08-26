@@ -38,8 +38,9 @@ export class RemovePhoneEntryComponent implements OnInit, OnDestroy {
 
   showConfirmation() {
     const initialState = {
-      message: "The selected entry will be deleted if it only exists in the selected phone book, " +
-        "otherwise it will just be unlinked from this phone book.  Do you want to proceed?"
+      message: "If the entry only exists in the selected book then it will be deleted. " +
+        "If the entry exists in other books then it will be just removed from this book. " +
+        "Do you want to proceed?"
     };
     this.modalService.show(ConfirmActionComponent, { initialState});
   }

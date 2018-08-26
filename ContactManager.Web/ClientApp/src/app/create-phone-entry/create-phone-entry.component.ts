@@ -62,12 +62,13 @@ export class CreatePhoneEntryComponent implements OnInit {
       this.modalService.show(ConfirmActionComponent, { initialState });
     },
       error => {
-        debugger;
-        if (error.error && error.error.includes && !error.error.includes("DOCTYPE")) {
-          this.errorMessage = error.error;
-          return;
+        if (error.status.toString() === "404") {
+          this.modalService.show(ConfirmActionComponent, { initialState });
         }
-        this.modalService.show(ConfirmActionComponent, { initialState });
+        else if (error.error && error.error.includes && !error.error.includes("DOCTYPE"))
+          this.errorMessage = error.error;
+        else
+          this.errorMessage = "Oops! An error occurred whilst processing your request.";
       });
   }
 
