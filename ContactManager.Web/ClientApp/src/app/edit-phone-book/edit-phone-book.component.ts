@@ -27,8 +27,8 @@ export class EditPhoneBookComponent implements OnInit {
 
   saveBook(formValues) {
     this.errorMessage = "";
-
-    this.http.put(this.baseUrl + `api/phonebooks/${this.phoneBook.id}`, formValues).subscribe(result => {
+    formValues.id = this.phoneBook.id;
+    this.http.put(this.baseUrl + `api/phonebooks/`, formValues).subscribe(result => {
         this.saveSuccessful = true;
         setTimeout(() => this.bsModalRef.hide(), 1000);
       },

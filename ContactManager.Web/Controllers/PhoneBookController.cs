@@ -80,7 +80,7 @@ namespace ContactManager.Web.Controllers
             }
         }
 
-        [HttpPut("{id}")]
+        [HttpPut]
         public async Task<IActionResult> Put(ApiEditPhoneBook phoneBookModel)
         {
             try
