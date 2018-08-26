@@ -7,7 +7,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { ConfirmActionComponent } from "../confirm-action/confirm-action.component";
 import { EnumConfirmationResult } from "../shared/enums/confirmation-result.enum";
 import { Subscription } from 'rxjs';
-import { CONSTANT_RELOAD_PHONE_BOOKS } from "../shared/contants";
+import { CONSTANT_RELOAD_PHONE_BOOKS } from "../shared/constants";
 
 @Component({
   selector: 'app-edit-phone-book',
@@ -26,7 +26,7 @@ export class EditPhoneBookComponent implements OnInit {
 
   ngOnInit() {
     //TODO: display book from server (with latest info) instead of taking from grid
-    this.name = new FormControl(this.phoneBook.name, Validators.required);
+    this.name = new FormControl(this.phoneBook.name, [Validators.required, Validators.minLength(5), Validators.maxLength(50)]);
     this.bookForm = new FormGroup({
       name: this.name
     });
@@ -46,6 +46,10 @@ export class EditPhoneBookComponent implements OnInit {
 
   showConfirmation() {
     this.modalService.show(ConfirmActionComponent);
+  }
+
+  isNameValid() {
+    return this.name.valid || this.name.pristine;
   }
 
   saveBook(formValues) {

@@ -23,6 +23,9 @@ namespace ContactManager.Core.Services
         public async Task<PhoneBook> CreatePhoneBookAsync(string name)
         {
             Guard.ThrowIfDefaultOrEmpty(name, "Name");
+            Guard.ThrowIfLessThanMinLength(name, "Name", 5);
+            Guard.ThrowIfGreaterThanMaxLength(name, "Name", 50);
+             
             await ValidateAlreadyExists(name);
 
             var phoneBook = new PhoneBook
@@ -39,6 +42,9 @@ namespace ContactManager.Core.Services
         public async Task EditPhoneBookAsync(PhoneBook phoneBook)
         {
             Guard.ThrowIfDefaultOrEmpty(phoneBook.Name, nameof(phoneBook.Name));
+            Guard.ThrowIfLessThanMinLength(phoneBook.Name, nameof(phoneBook.Name), 5);
+            Guard.ThrowIfGreaterThanMaxLength(phoneBook.Name, nameof(phoneBook.Name), 50);
+
             await ValidateAlreadyExists(phoneBook.Name, phoneBook.Id);
 
             var entity = await GetPhoneBookAsync(phoneBook.Id);

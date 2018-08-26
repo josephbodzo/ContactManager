@@ -7,7 +7,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { ConfirmActionComponent } from "../confirm-action/confirm-action.component";
 import { EnumConfirmationResult } from "../shared/enums/confirmation-result.enum";
 import { Subscription } from 'rxjs';
-import { CONSTANT_RELOAD_PHONE_ENTRIES } from "../shared/contants";
+import { CONSTANT_RELOAD_PHONE_ENTRIES, CONSTANT_PHONE_NUMBER_REGEX } from "../shared/constants";
 
 @Component({
   selector: 'app-edit-phone-entry',
@@ -27,8 +27,8 @@ export class EditPhoneEntryComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     //TODO: display book from server (with latest info) instead of taking from grid
-    this.name = new FormControl(this.phoneEntry.name, Validators.required);
-    this.phoneNumber = new FormControl(this.phoneEntry.phoneNumber, Validators.required);
+    this.name = new FormControl(this.phoneEntry.name, [Validators.required, Validators.minLength(5), Validators.maxLength(50)]);
+    this.phoneNumber = new FormControl(this.phoneEntry.phoneNumber, [Validators.required, Validators.pattern(CONSTANT_PHONE_NUMBER_REGEX)]);
     this.entryForm = new FormGroup({
       name: this.name,
       phoneNumber: this.phoneNumber
@@ -50,6 +50,14 @@ export class EditPhoneEntryComponent implements OnInit, OnDestroy {
 
   showConfirmation() {
     this.modalService.show(ConfirmActionComponent);
+  }
+
+  isNameValid() {
+    return this.name.valid || this.name.pristine;
+  }
+
+  isPhoneNumberValid() {
+    return this.phoneNumber.valid || this.phoneNumber.pristine;
   }
 
   saveEntry(formValues) {

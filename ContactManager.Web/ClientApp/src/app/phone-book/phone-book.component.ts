@@ -6,7 +6,7 @@ import { EditPhoneBookComponent } from "../edit-phone-book/edit-phone-book.compo
 import { DeletePhoneBookComponent } from "../delete-phone-book/delete-phone-book.component";
 import { IPhoneBook } from '../models/phoneBook.model';
 import { Subscription } from 'rxjs';
-import { CONSTANT_RELOAD_PHONE_BOOKS } from "../shared/contants";
+import { CONSTANT_RELOAD_PHONE_BOOKS } from "../shared/constants";
 
 @Component({
   selector: 'app-phone-book',

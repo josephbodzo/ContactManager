@@ -40,17 +40,18 @@ namespace ContactManager.Web.Controllers
         
         }
 
-        [HttpGet("{id}", Name = "PhoneEntryGet")]
-        public async Task<IActionResult> Get(int id)
+        [HttpGet]
+        [Route("getByPhoneNumber/", Order = 1)]
+        public async Task<IActionResult> GetByPhoneNumber(string phoneNumber)
         {
             try
             {
-                var phoneEntry = await _phoneEntryService.GetPhoneEntryAsync(id);
-
+                var phoneEntry = await _phoneEntryService.GetPhoneEntryByNumberAsync(phoneNumber);
                 if (phoneEntry == null)
                 {
-                    return new NotFoundResult();
+                    return NotFound();
                 }
+
                 return new OkObjectResult(_mapper.Map<ApiPhoneBookEntry>(phoneEntry));
 
             }
@@ -58,22 +59,18 @@ namespace ContactManager.Web.Controllers
             {
                 return new BadRequestObjectResult(ex.Message);
             }
-        }
 
+        }
+   
         [HttpPost("{phoneBookId}")]
         public async Task<IActionResult> Post(int phoneBookId, ApiCreatePhoneEntry phoneEntryModel)
         {
             try
             {
-               var phoneEntry = await _phoneEntryService.CreatePhoneEntryAsync(phoneEntryModel.Name, phoneEntryModel.PhoneNumber, phoneBookId);
-               return CreatedAtRoute(
-                    routeName: "PhoneEntryGet",
-                    routeValues: new {phoneEntry.Id, phoneBookId},
-                    value: new
-                    {
-                        phoneEntry.Name,
-                        phoneEntry.PhoneNumber
-                    });
+                await _phoneEntryService.CreatePhoneEntryAsync(phoneEntryModel.Name, phoneEntryModel.PhoneNumber, phoneBookId);
+
+                //TODO: Return created response with the url of the created object
+                return new OkResult();
             }
             catch (NotFoundException)
             {
@@ -104,12 +101,12 @@ namespace ContactManager.Web.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        [HttpDelete("{phoneBookId}/{id}")]
+        public async Task<IActionResult> Delete(int phoneBookId, int id)
         {
             try
             {
-                await _phoneEntryService.DeletePhoneEntryAsync(id);
+                await _phoneEntryService.RemovePhoneEntryAsync(phoneBookId, id);
                 return new OkResult();
             }
             catch (NotFoundException)

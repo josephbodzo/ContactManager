@@ -9,10 +9,15 @@ import { EnumConfirmationResult } from "../shared/enums/confirmation-result.enum
   styleUrls: ['./confirm-action.component.css']
 })
 export class ConfirmActionComponent implements OnInit {
-  message: string = "Are you sure you want to perform this action?";
+  message: string;
+  htmlMessage: string;
   constructor(public bsModalRef: BsModalRef, private modalService: BsModalService) { }
 
   ngOnInit() {
+    debugger;
+    if (!this.message && !this.htmlMessage) {
+      this.message = "Are you sure you want to perform this action?";
+    }
   }
 
   closeDialog(isConfirmed: boolean) {

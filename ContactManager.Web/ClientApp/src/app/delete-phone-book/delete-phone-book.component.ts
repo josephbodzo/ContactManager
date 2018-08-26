@@ -6,7 +6,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { ConfirmActionComponent } from "../confirm-action/confirm-action.component";
 import { EnumConfirmationResult } from "../shared/enums/confirmation-result.enum";
 import { Subscription } from 'rxjs';
-import { CONSTANT_RELOAD_PHONE_BOOKS } from "../shared/contants";
+import { CONSTANT_RELOAD_PHONE_BOOKS } from "../shared/constants";
 
 @Component({
   selector: 'app-delete-phone-book',

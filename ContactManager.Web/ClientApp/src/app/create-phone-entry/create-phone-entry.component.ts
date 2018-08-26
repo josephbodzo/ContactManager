@@ -6,7 +6,8 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { ConfirmActionComponent } from "../confirm-action/confirm-action.component";
 import { EnumConfirmationResult } from "../shared/enums/confirmation-result.enum";
 import { Subscription } from 'rxjs';
-import { CONSTANT_RELOAD_PHONE_ENTRIES } from "../shared/contants";
+import { IPhoneEntry } from '../models/phoneEntry.model';
+import { CONSTANT_RELOAD_PHONE_ENTRIES, CONSTANT_PHONE_NUMBER_REGEX } from "../shared/constants";
 
 @Component({
   selector: 'app-create-phone-entry',
@@ -25,8 +26,8 @@ export class CreatePhoneEntryComponent implements OnInit {
   subscription: Subscription;
 
   ngOnInit() {
-    this.name = new FormControl(null, Validators.required);
-    this.phoneNumber = new FormControl(null, Validators.required);
+    this.name = new FormControl(null, [Validators.required, Validators.minLength(5), Validators.maxLength(50)]);
+    this.phoneNumber = new FormControl(null, [Validators.required, Validators.pattern(CONSTANT_PHONE_NUMBER_REGEX)]);
     this.entryForm = new FormGroup({
       name: this.name,
       phoneNumber: this.phoneNumber
@@ -42,11 +43,44 @@ export class CreatePhoneEntryComponent implements OnInit {
   }
 
   showConfirmation() {
-    this.modalService.show(ConfirmActionComponent);
+    const initialState = {
+      message: "Are you sure you want to create this phone entry?",
+      htmlMessage: null
+    };
+
+    this.http.get<IPhoneEntry>(this.baseUrl + `api/phoneentries/getByPhoneNumber?phoneNumber=${this.entryForm.value.phoneNumber}`).subscribe(result => {
+      if (this.entryForm.value.name === result.name) {
+        initialState.htmlMessage = `An entry with the same name and phone number already exists.
+                                    Do you want to add the entry to this book?`;
+      } else {
+        initialState.htmlMessage = `Phone number already exists under
+                              <span class="text-danger">${result.name}</span>.
+                              Do you want to update entry's name?`;
+      }
+     
+      initialState.message = null;
+      this.modalService.show(ConfirmActionComponent, { initialState });
+    },
+      error => {
+        debugger;
+        if (error.error && error.error.includes && !error.error.includes("DOCTYPE")) {
+          this.errorMessage = error.error;
+          return;
+        }
+        this.modalService.show(ConfirmActionComponent, { initialState });
+      });
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  isNameValid() {
+    return this.name.valid || this.name.pristine;
+  }
+
+  isPhoneNumberValid() {
+    return this.phoneNumber.valid || this.phoneNumber.pristine;
   }
 
   saveEntry(formValues) {
@@ -54,9 +88,9 @@ export class CreatePhoneEntryComponent implements OnInit {
     this.errorMessage = "";
     this.http.post(this.baseUrl + `api/phoneentries/${this.phoneBookId}`, formValues).subscribe(result => {
       this.saveSuccessful = true;
-        this.modalService.setDismissReason(CONSTANT_RELOAD_PHONE_ENTRIES);
-        setTimeout(() => this.bsModalRef.hide(), 1000);
-      },
+      this.modalService.setDismissReason(CONSTANT_RELOAD_PHONE_ENTRIES);
+      setTimeout(() => this.bsModalRef.hide(), 1000);
+    },
       error => {
         if (error.error && error.error.includes && !error.error.includes("DOCTYPE"))
           this.errorMessage = error.error;

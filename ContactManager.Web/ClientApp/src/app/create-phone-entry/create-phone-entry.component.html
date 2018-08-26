@@ -15,11 +15,20 @@
     <div class="form-group">
       <div class="row bottom-margin">
         <div class="col-md-3"> <label for="name">Name:</label></div>
-        <div class="col-md-7"> <input formControlName="name" id="name" type="text" class="form-control" placeholder="Name"/></div>
+        <div class="col-md-7">
+          <input formControlName="name" id="name" type="text" class="form-control" placeholder="Name"/>
+          <em class="text-danger" *ngIf="!isNameValid() && entryForm.controls.name.errors.required">Name is required</em>
+          <em class="text-danger" *ngIf="!isNameValid() && entryForm.controls.name.errors.minlength">Name must be at least 5 characters</em>
+          <em class="text-danger" *ngIf="!isNameValid() && entryForm.controls.name.errors.maxlength">Name can only have max of 50 characters</em>
+        </div>
       </div>
       <div class="row">
         <div class="col-md-3"> <label for="phoneNumber">Phone Number:</label></div>
-        <div class="col-md-7"> <input formControlName="phoneNumber" id="phoneNumber" type="text" class="form-control" placeholder="Phone Number"/></div>
+        <div class="col-md-7">
+          <input formControlName="phoneNumber" id="phoneNumber" type="text" class="form-control" placeholder="Phone Number" />
+          <em class="text-danger" *ngIf="!isPhoneNumberValid() && entryForm.controls.phoneNumber.errors.required">Phone Number is required</em>
+          <em class="text-danger" *ngIf="!isPhoneNumberValid() && entryForm.controls.phoneNumber.errors.pattern">Phone Number must have 10 digits</em>
+        </div>
       </div>
     </div>
   </form>

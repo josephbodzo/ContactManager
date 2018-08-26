@@ -6,7 +6,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { ConfirmActionComponent } from "../confirm-action/confirm-action.component";
 import { EnumConfirmationResult } from "../shared/enums/confirmation-result.enum";
 import { Subscription } from 'rxjs';
-import { CONSTANT_RELOAD_PHONE_ENTRIES } from "../shared/contants";
+import { CONSTANT_RELOAD_PHONE_ENTRIES } from "../shared/constants";
 
 @Component({
   selector: 'app-remove-phone-entry',
@@ -20,6 +20,7 @@ export class RemovePhoneEntryComponent implements OnInit, OnDestroy {
   errorMessage: string;
   phoneEntry: IPhoneEntry;
   subscription: Subscription;
+  phoneBookId: number;
 
   ngOnInit() {
     this.subscription = this.modalService.onHide.subscribe((reason: string) => {
@@ -37,7 +38,7 @@ export class RemovePhoneEntryComponent implements OnInit, OnDestroy {
 
   showConfirmation() {
     const initialState = {
-      message: "Phone Entry will be deleted if it only exists in selected phone book, " +
+      message: "The selected entry will be deleted if it only exists in the selected phone book, " +
         "otherwise it will just be unlinked from this phone book.  Do you want to proceed?"
     };
     this.modalService.show(ConfirmActionComponent, { initialState});
@@ -45,7 +46,7 @@ export class RemovePhoneEntryComponent implements OnInit, OnDestroy {
 
   removeEntry(id) {
     this.errorMessage = "";
-    this.http.delete(this.baseUrl + `api/phoneentries/${id}`).subscribe(result => {
+    this.http.delete(this.baseUrl + `api/phoneentries/${this.phoneBookId}/${id}`).subscribe(result => {
       this.deleteSuccessful = true;
       this.modalService.setDismissReason(CONSTANT_RELOAD_PHONE_ENTRIES);
         setTimeout(() => this.bsModalRef.hide(), 1000);

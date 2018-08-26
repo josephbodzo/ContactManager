@@ -7,9 +7,10 @@ namespace ContactManager.Core.Services
     public interface IPhoneEntryService
     {
         Task<PhoneEntry> CreatePhoneEntryAsync(string name, string phoneNumber, int phoneBookId);
-        Task DeletePhoneEntryAsync(int id);
+        Task RemovePhoneEntryAsync(int phoneBookId, int id);
         Task EditPhoneEntryAsync(PhoneEntry phoneEntry);
         Task<IList<PhoneEntry>> GetPhoneEntriesAsync(int phoneBookId);
         Task<PhoneEntry> GetPhoneEntryAsync(int id);
+        Task<PhoneEntry> GetPhoneEntryByNumberAsync(string phoneNumber);
     }
 }

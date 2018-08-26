@@ -8,7 +8,7 @@ import { RemovePhoneEntryComponent } from "../remove-phone-entry/remove-phone-en
 import { IPhoneEntry } from '../models/phoneEntry.model';
 import { IPhoneBook } from '../models/phoneBook.model';
 import { Subscription } from 'rxjs';
-import { CONSTANT_RELOAD_PHONE_ENTRIES } from "../shared/contants";
+import { CONSTANT_RELOAD_PHONE_ENTRIES } from "../shared/constants";
 
 @Component({
   selector: 'app-phone-entry-list',
@@ -23,7 +23,6 @@ export class PhoneEntryListComponent implements OnInit, OnDestroy {
 
   constructor(private readonly http: HttpClient, @Inject('BASE_URL') private baseUrl: string,
     private readonly modalService: BsModalService, private readonly route: ActivatedRoute) {
-    debugger;
     const phoneBookId: number = +this.route.snapshot.params['phoneBookId'];
       this.http.get<IPhoneBook>(this.baseUrl + `api/phonebooks/${phoneBookId}`).subscribe(result => {
       this.phoneBook = result;
@@ -72,7 +71,8 @@ export class PhoneEntryListComponent implements OnInit, OnDestroy {
 
   openRemoveModal(phoneEntry: IPhoneEntry) {
     const initialState = {
-      phoneEntry: phoneEntry
+      phoneEntry: phoneEntry,
+      phoneBookId: this.phoneBook.id
     };
     this.modalService.show(RemovePhoneEntryComponent, { initialState });
   }

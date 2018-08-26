@@ -2,7 +2,8 @@
   <h4 class="modal-title pull-left">Confirm Action</h4>
 </div>
 <div class="modal-body text-center">
-    <p>{{message}}</p>
+    <p *ngIf="message">{{message}}</p>
+    <p *ngIf="htmlMessage" [innerHTML] ="htmlMessage"></p>
     <button type="button" class="btn btn-primary" (click)="closeDialog(true)" >Yes</button>
     <button type="button" class="btn btn-default" (click)="closeDialog(false)" >No</button>
   </div>

@@ -15,7 +15,12 @@
     <div class="form-group">
       <div class="row">
         <div class="col-md-3"> <label for="name">Name:</label></div>
-        <div class="col-md-7"> <input formControlName="name" id="name" type="text" class="form-control" placeholder="Name..." /></div>
+        <div class="col-md-7">
+          <input formControlName="name" id="name" type="text" class="form-control" placeholder="Name..." />
+          <em class="text-danger" *ngIf="!isNameValid() && bookForm.controls.name.errors.required">Name is required</em>
+          <em class="text-danger" *ngIf="!isNameValid() && bookForm.controls.name.errors.minlength">Name must be at least 5 characters</em>
+          <em class="text-danger" *ngIf="!isNameValid() && bookForm.controls.name.errors.maxlength">Name can only have max of 50 characters</em>
+        </div>
       </div>
     </div>
   </form>

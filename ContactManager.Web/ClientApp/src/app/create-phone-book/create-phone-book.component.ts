@@ -6,7 +6,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { ConfirmActionComponent } from "../confirm-action/confirm-action.component";
 import { EnumConfirmationResult } from "../shared/enums/confirmation-result.enum";
 import { Subscription } from 'rxjs';
-import { CONSTANT_RELOAD_PHONE_BOOKS } from "../shared/contants";
+import { CONSTANT_RELOAD_PHONE_BOOKS } from "../shared/constants";
 
 @Component({
   selector: 'app-create-phone-book',
@@ -23,7 +23,7 @@ export class CreatePhoneBookComponent implements OnInit, OnDestroy {
   subscription: Subscription;
 
   ngOnInit() {
-    this.name = new FormControl(null, Validators.required);
+    this.name = new FormControl(null, [Validators.required, Validators.minLength(5), Validators.maxLength(50)]);
     this.bookForm = new FormGroup({
       name: this.name
     });
@@ -44,6 +44,10 @@ export class CreatePhoneBookComponent implements OnInit, OnDestroy {
 
   showConfirmation() {
     this.modalService.show(ConfirmActionComponent);
+  }
+
+  isNameValid() {
+    return this.name.valid || this.name.pristine;
   }
 
   saveBook(formValues) {
